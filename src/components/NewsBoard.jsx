@@ -7,7 +7,7 @@ const NewsBoard = ({ category }) => {
     useEffect(() => {
         let URL = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=496a221f0afe4153863bd4542e970421`;
         fetch(URL)
-            .then(response => response.json()) // Corrected: Call .json() as a function
+            .then(response => response.json())
             .then(data => setArticles(data.articles))
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -18,7 +18,7 @@ const NewsBoard = ({ category }) => {
     return (
         <div>
             <h2 className="text-center">Latest <span className="badge bg-danger">News</span></h2>
-            {articles.map((news, index) => (
+            {Array.isArray(articles) && articles.map((news, index) => (
                 <NewsItem key={index} title={news.title} description={news.description} src={news.urlToImage} url={news.url} />
             ))}
         </div>
